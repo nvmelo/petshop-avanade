@@ -9,7 +9,7 @@ let pets = [
         peso: 3,
         tutor: 'Doug',
         contato: '(11) 98899-4545',
-        vacinado: true,
+        vacinado: false,
         servicos: ['banho', 'tosa']
     },
     {
@@ -20,7 +20,7 @@ let pets = [
         peso: 1,
         tutor: 'Jose',
         contato: '(11) 98569-4145',
-        vacinado: true,
+        vacinado: false,
         servicos: ['banho']
     },
     {
@@ -31,15 +31,36 @@ let pets = [
         peso: 5,
         tutor: 'Denis',
         contato: '(11) 97199-4215',
-        vacinado: true,
+        vacinado: false,
         servicos: ['banho']
     }
 ];
 
-const listarPets = () => {
-    for(let pet of pets){
-        console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
+// const listarPets = () => {
+//     for(let pet of pets){
+//         console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
+//     }
+// }
+
+// listarPets();
+
+const vacinarPets = (pet) => {
+    if (!pet.vacinado) {
+        pet.vacinado = true;
+        console.log(`${pet.nome} foi vacinado.`);
+    } else {
+        console.log(`${pet.nome} já estava vacinado.`)
     }
 }
 
-listarPets();
+const campanhaVacina = (pets) => {
+    var pets_vacinados = 0;
+    for(let pet of pets) {
+        if (!pet.vacinado)   pets_vacinados++;
+        vacinarPets(pet);
+    }
+
+    console.log(`Pets vacinados na campanha: ${pets_vacinados}.`);
+}
+
+campanhaVacina(pets);
