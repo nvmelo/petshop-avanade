@@ -61,3 +61,22 @@ const campanhaVacina = (pets) => {
 }
 
 campanhaVacina(pets);
+
+
+const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
+    newPet = {
+        nome, 
+        tipo, 
+        idade, 
+        raca, 
+        peso, 
+        tutor, 
+        contato, 
+        vacinado, 
+        servicos
+    }
+    pets.push(newPet);
+}
+
+insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
+console.log(pets[pets.length-1]);
