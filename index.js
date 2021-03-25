@@ -1,6 +1,6 @@
 const nomePetshop = 'PETSHOP AVANADE';
 
-let pet = [
+let pets = [
     {
         nome: 'Costelinha',
         tipo: 'cachorro',
@@ -37,8 +37,8 @@ let pet = [
 ];
 
 const listarPets = () => {
-    for(let i=0; i<pet.length; i++){
-        console.log(i+1 + ' -->  ' + pet[i].nome);
+    for(let pet of pets){
+        console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
     }
 }
 
