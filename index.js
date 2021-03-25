@@ -36,13 +36,13 @@ let pets = [
     }
 ];
 
-// const listarPets = () => {
-//     for(let pet of pets){
-//         console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
-//     }
-// }
+const listarPets = () => {
+    for(let pet of pets){
+        console.log(`--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}\n`);
+    }
+}
 
-// listarPets();
+listarPets();
 
 const vacinarPets = (pet) => {
     if (!pet.vacinado) {
@@ -80,3 +80,32 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
 
 insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
 console.log(pets[pets.length-1]);
+
+const darBanhoPet = (pet) => {
+    if (!pet.servicos.includes("banho")) {
+        pet.servicos.push("banho");
+        console.log(moment().format("L - LTS"));
+        console.log(`${pet.nome} está de banho tomado!`);
+    }
+}
+
+const tosarPet = (pet) => {
+    if (!pet.servicos.includes("tosa")) {
+        pet.servicos.push("tosa");
+        console.log(moment().format("L - LTS"));
+        console.log(`${pet.nome} está com cabelinho na régua!`);
+    }
+}
+
+const apararUnhasPet = (pet) => {
+    if (!pet.servicos.includes("unha")) {
+        pet.servicos.push("unha");
+        console.log(moment().format("L - LTS"));
+        console.log(`${pet.nome} está de unhas aparadas!`);
+    }
+}
+
+var moment = require('moment'); // require
+darBanhoPet(pets[0]);
+tosarPet(pets[1]);
+apararUnhasPet(pets[2]);
