@@ -1,3 +1,5 @@
+var moment = require('moment'); // require
+
 const nomePetshop = 'PETSHOP AVANADE';
 
 let pets = [
@@ -42,7 +44,7 @@ const listarPets = () => {
     }
 }
 
-listarPets();
+// listarPets();
 
 const vacinarPets = (pet) => {
     if (!pet.vacinado) {
@@ -60,7 +62,7 @@ const campanhaVacina = (pets) => {
     console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
 }
 
-campanhaVacina(pets);
+// campanhaVacina(pets);
 
 
 const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
@@ -78,34 +80,33 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
     pets.push(newPet);
 }
 
-insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
-console.log(pets[pets.length-1]);
+// insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
+// console.log(pets[pets.length-1]);
 
 const darBanhoPet = (pet) => {
-    if (!pet.servicos.includes("banho")) {
-        pet.servicos.push("banho");
-        console.log(moment().format("L - LTS"));
-        console.log(`${pet.nome} está de banho tomado!`);
-    }
+    pet.servicos.push({
+        servico: "banho",
+        data: moment().format("L - LTS")
+    });
+    console.log(`${pet.nome} está de banho tomado!`);
 }
 
 const tosarPet = (pet) => {
-    if (!pet.servicos.includes("tosa")) {
-        pet.servicos.push("tosa");
-        console.log(moment().format("L - LTS"));
-        console.log(`${pet.nome} está com cabelinho na régua!`);
-    }
+    pet.servicos.push({
+        servico: "tosa",
+        data: moment().format("L - LTS")
+    });
+    console.log(`${pet.nome} está com cabelinho na regua!`);
 }
 
 const apararUnhasPet = (pet) => {
-    if (!pet.servicos.includes("unha")) {
-        pet.servicos.push("unha");
-        console.log(moment().format("L - LTS"));
+        pet.servicos.push({
+            servico: "unha",
+            data: moment().format("L - LTS")
+        });
         console.log(`${pet.nome} está de unhas aparadas!`);
-    }
 }
 
-var moment = require('moment'); // require
 darBanhoPet(pets[0]);
 tosarPet(pets[1]);
 apararUnhasPet(pets[2]);
