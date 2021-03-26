@@ -1,5 +1,7 @@
-var moment = require('moment');
-var pets = require("./db-pets.json");
+const moment = require('moment');
+const fs = require('fs');
+// const pets = require('./db-pets.json');
+var pets = JSON.parse(fs.readFileSync('./db-pets.json'));
 
 const nomePetshop = 'PETSHOP AVANADE';
 
@@ -31,7 +33,6 @@ const campanhaVacina = (pets) => {
 
 // campanhaVacina(pets);
 
-
 const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
     newPet = {
         nome, 
@@ -45,6 +46,10 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
         servicos
     }
     pets.push(newPet);
+    var _pets = JSON.stringify(pets);
+    fs.writeFileSync('db-pets.json', _pets);
+
+
 }
 
 insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
@@ -77,10 +82,10 @@ const apararUnhasPet = (pet) => {
 const atenderCliente = (pet, servico) => {
     servico(pet);
 }
-
+    
 atenderCliente(pets[0], darBanhoPet);
 
-console.log("\n");
-for (const pet of pets) {
-    console.log(pet);
-}
+// console.log("\n");
+// for (const pet of pets) {
+//     console.log(pet);
+// }
