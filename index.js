@@ -1,42 +1,9 @@
-var moment = require('moment'); // require
+var moment = require('moment');
+var pets = require("./db-pets.json");
 
 const nomePetshop = 'PETSHOP AVANADE';
 
-let pets = [
-    {
-        nome: 'Costelinha',
-        tipo: 'cachorro',
-        idade: 5,
-        raca: 'Vira-lata',
-        peso: 3,
-        tutor: 'Doug',
-        contato: '(11) 98899-4545',
-        vacinado: true,
-        servicos: ['banho', 'tosa']
-    },
-    {
-        nome: 'Rex',
-        tipo: 'papagaio',
-        idade: 46,
-        raca: 'Imperador',
-        peso: 1,
-        tutor: 'Jose',
-        contato: '(11) 98569-4145',
-        vacinado: false,
-        servicos: ['banho']
-    },
-    {
-        nome: 'Caninha',
-        tipo: 'cachorro',
-        idade: 3,
-        raca: 'Vira-lata',
-        peso: 5,
-        tutor: 'Denis',
-        contato: '(11) 97199-4215',
-        vacinado: false,
-        servicos: ['banho']
-    }
-];
+
 
 const listarPets = () => {
     for(let pet of pets){
@@ -80,7 +47,7 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
     pets.push(newPet);
 }
 
-// insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
+insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
 // console.log(pets[pets.length-1]);
 
 const darBanhoPet = (pet) => {
@@ -110,3 +77,8 @@ const apararUnhasPet = (pet) => {
 darBanhoPet(pets[0]);
 tosarPet(pets[1]);
 apararUnhasPet(pets[2]);
+
+console.log("\n");
+for (const pet of pets) {
+    console.log(pet);
+}
