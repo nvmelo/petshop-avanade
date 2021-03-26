@@ -74,9 +74,11 @@ const apararUnhasPet = (pet) => {
         console.log(`${pet.nome} está de unhas aparadas!`);
 }
 
-darBanhoPet(pets[0]);
-tosarPet(pets[1]);
-apararUnhasPet(pets[2]);
+const atenderCliente = (pet, servico) => {
+    servico(pet);
+}
+
+atenderCliente(pets[0], darBanhoPet);
 
 console.log("\n");
 for (const pet of pets) {
