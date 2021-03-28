@@ -7,6 +7,12 @@ const pets = JSON.parse(fs.readFileSync('./db-pets.json'));
 
 const nomePetshop = 'PETSHOP AVANADE';
 
+const WriteJson = (pets) => {
+    // Converte o JS object atualizado em JSON e sobrescreve o db-pets.json de forma sincrona
+    var _pets = JSON.stringify(pets);
+    fs.writeFileSync('db-pets.json', _pets);
+}
+
 
 const listarPets = () => {
     for(let pet of pets){
@@ -31,6 +37,7 @@ const campanhaVacina = (pets) => {
     for(let pet of pets)
         vacinarPets(pet);
     console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
+    WriteJson(pets);
 }
 
 // campanhaVacina(pets);
@@ -48,13 +55,7 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
         servicos
     }
     pets.push(newPet);
-
-    // Converte o JS object atualizado em JSON e sobrescreve o db-pets.json de forma sincrona
-    // Poderia converter somente o newPet e adicionar ao db-pets.json usando fs.appendFileSync()
-    var _pets = JSON.stringify(pets);
-    fs.writeFileSync('db-pets.json', _pets);
-
-
+    WriteJson(pets);
 }
 
 // insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
@@ -85,9 +86,10 @@ const apararUnhasPet = (pet) => {
 
 const atenderCliente = (pet, servico) => {
     servico(pet);
+    WriteJson(pets);
 }
     
-// atenderCliente(pets[0], darBanhoPet);
+atenderCliente(pets[0], darBanhoPet);
 
 // console.log("\n");
 // for (const pet of pets) {
