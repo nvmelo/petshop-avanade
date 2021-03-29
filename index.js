@@ -1,16 +1,18 @@
 const moment = require('moment');
 const fs = require('fs');
-// const pets = require('./db-pets.json');
-
 //Lê de forma sincrona o arquivo JSON através do modulo fs e converte em JS object
-const pets = JSON.parse(fs.readFileSync('./db-pets.json'));
+const db_pets = JSON.parse(fs.readFileSync('./db-pets.json'));
+//Acessa o array de pets
+const pets = db_pets.pets;
 
 const nomePetshop = 'PETSHOP AVANADE';
 
+// Atenção na hora de chamar essa funcao! O parâmetro passado deve ser db_pets para
+// garantir a sobrescrita correta do arquivo json
 const WriteJson = (pets) => {
     // Converte o JS object atualizado em JSON e sobrescreve o db-pets.json de forma sincrona
     var _pets = JSON.stringify(pets);
-    fs.writeFileSync('db-pets.json', _pets);
+    fs.writeFileSync('db-pets.json', _pets, 'utf-8');
 }
 
 
@@ -37,7 +39,7 @@ const campanhaVacina = (pets) => {
     for(let pet of pets)
         vacinarPets(pet);
     console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
-    WriteJson(pets);
+    WriteJson(db_pets);
 }
 
 // campanhaVacina(pets);
@@ -55,10 +57,10 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
         servicos
     }
     pets.push(newPet);
-    WriteJson(pets);
+    WriteJson(db_pets);
 }
 
-// insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
+ insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
 
 const darBanhoPet = (pet) => {
     pet.servicos.push({
@@ -86,10 +88,13 @@ const apararUnhasPet = (pet) => {
 
 const atenderCliente = (pet, servico) => {
     servico(pet);
-    WriteJson(pets);
+    WriteJson(db_pets);
 }
     
 atenderCliente(pets[0], darBanhoPet);
+atenderCliente(pets[1], tosarPet);
+atenderCliente(pets[1], apararUnhasPet);
+
 
 // console.log("\n");
 // for (const pet of pets) {
