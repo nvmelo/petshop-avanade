@@ -7,8 +7,9 @@ const pets = db_pets.pets;
 
 const nomePetshop = 'PETSHOP AVANADE';
 
-// Atenção na hora de chamar essa funcao! O parâmetro passado deve ser db_pets para
-// garantir a sobrescrita correta do arquivo json
+// Atenção na hora de chamar essa funcao! O parâmetro passado deve ser 'db_pets' para
+// garantir a sobrescrita completa do JSON. Caso passe o parâmetro 'pets', o JSON
+// será sobrescrito pelo array de pets
 const WriteJson = (pets) => {
     // Converte o JS object atualizado em JSON e sobrescreve o db-pets.json de forma sincrona
     var _pets = JSON.stringify(pets);
@@ -35,7 +36,7 @@ const vacinarPets = (pet) => {
 }
 
 const campanhaVacina = (pets) => {
-    petsVacinados = pets.filter(pets => pets.vacinado === false);
+    const petsVacinados = pets.filter(pets => pets.vacinado === false);
     for(let pet of pets)
         vacinarPets(pet);
     console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
