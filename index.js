@@ -89,8 +89,10 @@ const apararUnhasPet = (pet) => {
 }
 
 const atenderCliente = (pet, servico) => {
+    console.log("\nBem vindo, " + pet.nome + "!");
     servico(pet);
     WriteJson(db_pets);
+    console.log("Até logo, " + pet.nome + "!");
 }
     
 atenderCliente(pets[0], darBanhoPet);
