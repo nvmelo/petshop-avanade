@@ -17,12 +17,11 @@ const WriteJson = (pets) => {
     fs.writeFileSync('db-pets.json', _pets, 'utf-8');
 }
 
-
 const listarPets = () => {
-    for(let pet of pets){
+    pets.forEach(pet => {
         console.log(`\n--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}`);
         console.log("\tStatus: " + (pet.vacinado ? "Vacinado" : "Nao vacinado"));
-    }
+    });
 }
 
 // listarPets();
@@ -38,8 +37,7 @@ const vacinarPets = (pet) => {
 
 const campanhaVacina = (pets) => {
     const petsVacinados = pets.filter(pets => pets.vacinado === false);
-    for(let pet of pets)
-        vacinarPets(pet);
+    pets.map(pet => vacinarPets(pet));
     console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
     WriteJson(db_pets);
 }
@@ -62,7 +60,7 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
     WriteJson(db_pets);
 }
 
- insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
+//  insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
 
 const darBanhoPet = (pet) => {
     pet.servicos.push({
@@ -94,10 +92,27 @@ const atenderCliente = (pet, servico) => {
     WriteJson(db_pets);
     console.log("Até logo, " + pet.nome + "!");
 }
+
+const buscarPet = (nome) => {
+    return petBuscado = pets.find(pet => pet.nome === nome);
+}
+
+const filtrarTipoPet = (tipo) => {
+    return petsDoMesmoTipo = pets.filter(pets => pets.tipo === tipo);
+}
+
+const clientePremium = (pet) => {
+    const servicos = pet.servicos.map(x => x = 1);
+    const somaServicos = servicos.reduce((sum, current) => sum + current);
+    console.log((somaServicos<10) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
+}
+
+clientePremium(pets[0]);
+
     
-atenderCliente(pets[0], darBanhoPet);
-atenderCliente(pets[1], tosarPet);
-atenderCliente(pets[1], apararUnhasPet);
+// atenderCliente(pets[0], darBanhoPet);
+// atenderCliente(pets[1], tosarPet);
+// atenderCliente(pets[1], apararUnhasPet);
 
 
 // console.log("\n");
