@@ -12,7 +12,8 @@ const nomePetshop = 'PETSHOP AVANADE';
 // será sobrescrito pelo array de pets
 const WriteJson = (pets) => {
     // Converte o JS object atualizado em JSON e sobrescreve o db-pets.json de forma sincrona
-    var _pets = JSON.stringify(pets);
+    // Os dois últimos parâmetros garantem a identação correta do JSON
+    var _pets = JSON.stringify(pets, null, 2); 
     fs.writeFileSync('db-pets.json', _pets, 'utf-8');
 }
 
