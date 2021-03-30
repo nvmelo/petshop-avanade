@@ -19,18 +19,20 @@ const WriteJson = (pets) => {
 
 const listarPets = () => {
     pets.forEach(pet => {
-        console.log(`\n--> ${pet.nome}:\n\tIdade: ${pet.idade}\n\tTipo: ${pet.tipo}\n\tRaca: ${pet.raca}`);
-        console.log("\tStatus: " + (pet.vacinado ? "Vacinado" : "Nao vacinado"));
+    const {nome, idade, tipo, raca, vacinado} = pet;
+        console.log(`\n--> ${nome}:\n\tIdade: ${idade}\n\tTipo: ${tipo}\n\tRaca: ${raca}`);
+        console.log("\tStatus: " + (vacinado ? "Vacinado" : "Nao vacinado"));
     });
 }
 // listarPets();
 
 const vacinarPets = (pet) => {
-    if (!pet.vacinado) {
-        pet.vacinado = true;
-        console.log(`* ${pet.nome} foi vacinado.`);
+    let {nome, vacinado} = pet;
+    if (!vacinado) {
+        vacinado = true;
+        console.log(`* ${nome} foi vacinado.`);
     } else {
-        console.log(`${pet.nome} já estava vacinado.`)
+        console.log(`${nome} já estava vacinado.`)
     }
 }
 
@@ -42,68 +44,85 @@ const campanhaVacina = (pets) => {
 }
 // campanhaVacina(pets);
 
-const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
-    newPet = {
-        nome, 
-        tipo, 
-        idade, 
-        raca, 
-        peso, 
-        tutor, 
-        contato, 
-        vacinado, 
-        servicos
-    }
-    pets.push(newPet);
+const inserePets = (newPet) => {
+    pets.push(...newPet);
     WriteJson(db_pets);
 }
-//  insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
+//  inserePets(
+//     [
+//         {
+//             "nome": "tob",
+//             "tipo": "cachorro",
+//             "idade": 3,
+//             "raca": "vira-lata",
+//             "peso": 5,
+//             "tutor": "diego",
+//             "contato": "(81) 99902-4433)",
+//             "vacinado": false,
+//             "servicos": [],
+//         },
+//         {
+//             "nome": "miau",
+//             "tipo": "gato",
+//             "idade": 3,
+//             "raca": "dourado",
+//             "peso": 5,
+//             "tutor": "diego",
+//             "contato": "(81) 99911-4653)",
+//             "vacinado": false,
+//             "servicos": [],
+//         }
+//     ]
+//  );
 
 const darBanhoPet = (pet) => {
-    pet.servicos.push({
+    const {nome, servicos} = pet;
+    servicos.push({
         servico: "banho",
         data: moment().format("L - LTS")
     });
-    console.log(`${pet.nome} está de banho tomado!`);
+    console.log(`${nome} está de banho tomado!`);
 }
 
 const tosarPet = (pet) => {
-    pet.servicos.push({
+    const {nome, servicos} = pet;
+    servicos.push({
         servico: "tosa",
         data: moment().format("L - LTS")
     });
-    console.log(`${pet.nome} está com cabelinho na regua!`);
+    console.log(`${nome} está com cabelinho na regua!`);
 }
 
 const apararUnhasPet = (pet) => {
-        pet.servicos.push({
+    const {nome, servicos} = pet;
+        servicos.push({
             servico: "unha",
             data: moment().format("L - LTS")
         });
-        console.log(`${pet.nome} está de unhas aparadas!`);
+        console.log(`${nome} está de unhas aparadas!`);
 }
 
 const atenderCliente = (pet, servico) => {
-    console.log("\nBem vindo, " + pet.nome + "!");
+    const {nome} = pet;
+    console.log("\nBem vindo, " + nome + "!");
     servico(pet);
     WriteJson(db_pets);
-    console.log("Até logo, " + pet.nome + "!");
+    console.log("Até logo, " + nome + "!");
 }
-// atenderCliente(pets[1], apararUnhasPet);
+// atenderCliente(pets[1], darBanhoPet);
 
 const buscarPet = (nome) => {
-    return petBuscado = pets.find(pet => pet.nome === nome);
+    return pets.find(pet => pet.nome === nome);
 }
 // console.log(buscarPet("Caninha"));
 
 const filtrarTipoPet = (tipo) => {
-    return petsDoMesmoTipo = pets.filter(pets => pets.tipo === tipo);
+    return pets.filter(pets => pets.tipo === tipo);
 }
 // console.log(filtrarTipoPet("cachorro"));
 
 const clientePremium = (pet) => {
-    const servicos = pet.servicos.map(x => x = 1);
-    const somaServicos = servicos.reduce((sum, current) => sum + current);
-    console.log((somaServicos<10) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
+    const {servicos} = pet;
+    console.log((servicos.length < 10) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
 }
 // clientePremium(pets[0]);
