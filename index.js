@@ -23,7 +23,6 @@ const listarPets = () => {
         console.log("\tStatus: " + (pet.vacinado ? "Vacinado" : "Nao vacinado"));
     });
 }
-
 // listarPets();
 
 const vacinarPets = (pet) => {
@@ -37,11 +36,10 @@ const vacinarPets = (pet) => {
 
 const campanhaVacina = (pets) => {
     const petsVacinados = pets.filter(pets => pets.vacinado === false);
-    pets.map(pet => vacinarPets(pet));
+    petsVacinados.map(pet => vacinarPets(pet));
     console.log(`\nPets vacinados na campanha: ${petsVacinados.length}.`);
     WriteJson(db_pets);
 }
-
 // campanhaVacina(pets);
 
 const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, servicos) => {
@@ -59,7 +57,6 @@ const insereCliente = (nome, tipo, idade, raca, peso, tutor, contato, vacinado, 
     pets.push(newPet);
     WriteJson(db_pets);
 }
-
 //  insereCliente("tob", "cachorro", 3, "vira-lata", 5, "diego", "(81) 99902-4433", false, []);
 
 const darBanhoPet = (pet) => {
@@ -92,30 +89,21 @@ const atenderCliente = (pet, servico) => {
     WriteJson(db_pets);
     console.log("Até logo, " + pet.nome + "!");
 }
+// atenderCliente(pets[1], apararUnhasPet);
 
 const buscarPet = (nome) => {
     return petBuscado = pets.find(pet => pet.nome === nome);
 }
+// console.log(buscarPet("Caninha"));
 
 const filtrarTipoPet = (tipo) => {
     return petsDoMesmoTipo = pets.filter(pets => pets.tipo === tipo);
 }
+// console.log(filtrarTipoPet("cachorro"));
 
 const clientePremium = (pet) => {
     const servicos = pet.servicos.map(x => x = 1);
     const somaServicos = servicos.reduce((sum, current) => sum + current);
     console.log((somaServicos<10) ? "Cliente nao elegivel" : "** CLIENTE PREMIUM: Elegivel para desconto.");
 }
-
-clientePremium(pets[0]);
-
-    
-// atenderCliente(pets[0], darBanhoPet);
-// atenderCliente(pets[1], tosarPet);
-// atenderCliente(pets[1], apararUnhasPet);
-
-
-// console.log("\n");
-// for (const pet of pets) {
-//     console.log(pet);
-// }
+// clientePremium(pets[0]);
